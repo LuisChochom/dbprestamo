@@ -1,17 +1,16 @@
 services:
-  postgres_db:
+  umg:
     image: postgres:16-alpine
-    container_name: postgres_prestamos
+    container_name: umg
     restart: always
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - umg_pgdata:/var/lib/postgresql/data
 
 volumes:
-  pg_data:
-    name: prestamos_pgdata
+  umg_pgdata:
